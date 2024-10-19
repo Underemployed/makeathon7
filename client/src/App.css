@@ -1,0 +1,11 @@
+body {
+    background-image: url('./assets/welcomebackk.jpg'); /* Adjust the path to your background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repetition */
+  }
+  
+  .flex {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Overlay color for better readability */
+  }
+  
