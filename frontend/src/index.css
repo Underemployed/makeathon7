@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+body{
+  background-color: rgb(241, 241, 245);
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1;
+  color: inherit;
+}
+.container{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.btn{
+  background-color: rgb(241, 241, 245);
+  color: rgb(24, 16, 62);
+  padding: 14px 25px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}

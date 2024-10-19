@@ -1,0 +1,60 @@
+nav {
+    width: 100%;
+    color: #fff;
+    position: fixed;
+    padding: 4px 40px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+nav img {
+    width: 80px;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px; /* Space between each button */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+    padding: 5px 10px;
+    font-family: inherit; 
+}
+
+.nav-btn:hover {
+    color: #ddd; /* Adds a hover effect to the buttons */
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.btn {
+    background-color: #61aa63;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: inherit;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
