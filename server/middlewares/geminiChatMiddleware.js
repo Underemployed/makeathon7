@@ -1,5 +1,11 @@
 
 const User = require('../models/userSchema');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 
 const geminiChatMiddleware = async (req, res, next) => {
     try {
@@ -12,16 +18,13 @@ const geminiChatMiddleware = async (req, res, next) => {
 
         req.chatSummary = user.chatSummary;
 
-        // Store the original json method
         const originalJson = res.json;
 
-        // Override the json method
         res.json = function(data) {
-            // Update the chat summary
             const newSummary = updateChatSummary(req.chatSummary, req.body.message, data.response);
+
             User.findByIdAndUpdate(userId, { chatSummary: newSummary }).exec();
 
-            // Call the original json method
             originalJson.call(this, data);
         };
 
@@ -32,9 +35,19 @@ const geminiChatMiddleware = async (req, res, next) => {
 };
 
 function updateChatSummary(currentSummary, userMessage, geminiResponse) {
-    // Implement your summary update logic here
-    // This is a basic example; you might want to use more sophisticated summarization techniques
+
     return `${currentSummary}\nUser: ${userMessage}\nGemini: ${geminiResponse}`.trim();
 }
 
-module.exports = geminiChatMiddleware;
+
+
+const prompt = "Does this look store-bought or homemade?";
+const image = {
+    inlineData: {
+        data: Buffer.from(fs.readFileSync("cookie.png")).toString("base64"),
+        mimeType: "image/png",
+    },
+};
+
+const result = await model.generateContent([prompt, image]);
+console.log(result.response.text());
