@@ -16,16 +16,19 @@ const geminiModel = googleAI.getGenerativeModel({
     geminiConfig,
 });
 
-const generate = async (text) => {
+const generate = async (prompt) => {
     try {
-        const prompt = "Tell me about google.";
         const result = await geminiModel.generateContent(prompt);
         const response = result.response;
-        text = (response.text());
+        console.log(response.text());
+        return response.text();
+
     } catch (error) {
-        text = ("response error", error);
+        console.log("response error", error);
+        return "Something went wrong";
     }
-    return text;
 };
 
-generate();
+generate("prompt").then((response) => {
+    console.log(response);
+});
