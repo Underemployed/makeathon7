@@ -6,13 +6,13 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-mongoose.connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 5000 // Increase timeout to 5 seconds
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-});
+// mongoose.connect(process.env.MONGO_URI, {
+//     serverSelectionTimeoutMS: 5000 // Increase timeout to 5 seconds
+// }).then(() => {
+//     console.log('Connected to MongoDB');
+// }).catch((error) => {
+//     console.error('Error connecting to MongoDB:', error);
+// });
 
 const getChatHistory = async (userId) => {
     try {
@@ -44,12 +44,10 @@ const cleanResponse = (mes) => {
     return mes;
 };
 
-const updateChatSummary = async (chathistory, response, user) => {
+const updateChatSummary = async (chathistory) => {
     try {
         const result = await model.generateContent(chathistory);
         const newSummary = result.response.text();
-        user.chatSummary = newSummary;
-        await user.save();
         return newSummary;
     } catch (error) {
         console.error("Error updating chat summary:", error);
@@ -68,8 +66,10 @@ const getAIResponse = async (userMessage, userId) => {
 
         const result = await model.generateContent(prompt + "\n\nUser: " + userMessage);
         const aiResponse = result.response.text();
-
-        user.chatSummary = (user.chatSummary || '') + "\n\nUser: " + userMessage + "\nAI: " + aiResponse;
+        
+        const currentTime = new Date().toISOString();
+        user.chatSummary = (user.chatSummary || '') + `\n\n[${currentTime}] User: ${userMessage}\n[${currentTime}] AI: ${aiResponse}`;
+        user.chatSummary = await updateChatSummary(user.chatSummary);
         await user.save();
 
         return cleanResponse(aiResponse);
@@ -108,6 +108,7 @@ const createTestUser = async () => {
             console.log("Test user created successfully");
         } else {
             console.log("Test user already exists");
+
         }
     } catch (error) {
         console.error("Error creating test user:", error);
@@ -115,4 +116,7 @@ const createTestUser = async () => {
 };
 
 // Run the main function
-createTestUser().then(() => main());
+// createTestUser().then(() => main()); 
+
+
+module.exports = getAIResponse;

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 require('dotenv').config();
 const db = require('./db conn/connection'); 
 const authMiddleware = require('./middlewares/authMiddleware');
@@ -17,6 +18,7 @@ const corsOptions = {
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(morgan('dev'));
 
 //import routers
 const incidentRouter = require('./routes/incidentRouters');
@@ -25,6 +27,7 @@ const authRouter = require('./routes/authRouters');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const contactRouters = require('./routes/contactRouters');
 const adminRouter = require('./routes/adminRouters');
+const aiChatRouter = require('./routes/aiChatRouter');
 
 //use Routers
 // app.use('/api', authMiddleware); 
@@ -34,6 +37,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/contact', contactRouters);
 
 app.use('/api/admin', adminRouter);
+app.use('/api/ai', aiChatRouter);
 
 app.get('/hello', (req, res) => {
     res.send('Hello, World!');
