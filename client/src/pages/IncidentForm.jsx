@@ -103,7 +103,7 @@ const IncidentForm = () => {
               value={name}
               readOnly 
               style={inputStyles}
-              className='bg-gray-800 focus:bg-gray-900 outline-none border border-white focus:border-pink-400'
+              className='bg-gray-800 focus:bg-gray-900 outline-none border border-white focus:border-blue-400'
             />
           </div>
 
@@ -145,7 +145,7 @@ const IncidentForm = () => {
                 style={{ ...inputStyles, flex: '1' }}
                 className='bg-gray-800 focus:bg-gray-900'
               />
-              <button type="button" onClick={setToday} style={smallButtonStyles} className='bg-pink-500'>
+              <button type="button" onClick={setToday} style={smallButtonStyles} className='bg-blue-500'>
                 Today
               </button>
             </div>
@@ -162,7 +162,7 @@ const IncidentForm = () => {
                 style={{ ...inputStyles, flex: '1' }}
                 className='bg-gray-800 focus:bg-gray-900'
               />
-              <button type="button" onClick={setNow} style={smallButtonStyles} className='bg-pink-500'>
+              <button type="button" onClick={setNow} style={smallButtonStyles} className='bg-blue-500'>
                 Now
               </button>
             </div>
@@ -174,9 +174,9 @@ const IncidentForm = () => {
               type="button"
               onClick={detectLocation}
               style={buttonStyles}
-              className='bg-pink-500'
+              className='bg-bluer-500'
             >
-              Detect My Location<MdMyLocation className='inline-block mx-1 text-xl hover:bg-pink-600'/>
+              Detect My Location<MdMyLocation className='inline-block mx-1 text-xl hover:bg-blue-600'/>
             </button>
             <p style={locationTextStyles} className=' text-xs m-0 mt-1'>
               {latitude && longitude
@@ -189,7 +189,7 @@ const IncidentForm = () => {
             type="submit"
             disabled={!latitude || !longitude}
             style={submitButtonStyles}
-            className='bg-pink-600'
+            className='bg-blue-600'
           >
             Submit
           </button>
