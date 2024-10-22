@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import { useAuth } from "../store/auth"; // Assuming you have this custom hook for authentication
 
-const googleMapsApiKey = "AIzaSyCxT2PuGQpdwLI4Tr_VrV0OxXbgHFvdNCE"; // Your Google Maps API key
+const googleMapsApiKey = ""; // Your Google Maps API key
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const EditIncident = ({ incidentId }) => {
