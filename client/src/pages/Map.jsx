@@ -2,7 +2,7 @@ const Map = () => {
   // ... other code
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCxT2PuGQpdwLI4Tr_VrV0OxXbgHFvdNCE">
+    <LoadScript googleMapsApiKey="">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
